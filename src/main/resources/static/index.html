@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <script
+            src="http://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+<input id="inputA" type="text">
+<input type="text" id="inputB">
+<button onclick="plus()">+</button>
+<button onclick="minus()">-</button>
+<button onclick="multipl()">*</button>
+<button onclick="div()">/</button>
+<br>
+<div id="result">결과</div>
+
+<script>
+    async function plus(){
+        let a = $('#inputA').val().trim();
+        let b = $('#inputB').val().trim();
+        if(! a || !b || a === '' || b === ''){
+            return;
+        }
+
+        try{
+            let response = await $.get('/calc/' + a + '/' + b + '/plus');
+            $('#result').html(JSON.stringify(response));
+        }catch(err){
+            $('#result').html(JSON.stringify(err));
+        }
+    }
+    async function minus(){
+        let a = $('#inputA').val().trim();
+        let b = $('#inputB').val().trim();
+        if(! a || !b || a === '' || b === ''){
+            return;
+        }
+
+        try{
+            let response = await $.get('/calc/' + a + '/' + b + '/min');
+            $('#result').html(JSON.stringify(response));
+        }catch(err){
+            $('#result').html(JSON.stringify(err));
+        }
+    }
+    async function multipl(){
+        let a = $('#inputA').val().trim();
+        let b = $('#inputB').val().trim();
+        if(! a || !b || a === '' || b === ''){
+            return;
+        }
+
+        try{
+            let response = await $.get('/calc/' + a + '/' + b + '/mul');
+            $('#result').html(JSON.stringify(response));
+        }catch(err){
+            $('#result').html(JSON.stringify(err));
+        }
+    }
+    async function div(){
+        let a = $('#inputA').val().trim();
+        let b = $('#inputB').val().trim();
+        if(! a || !b || a === '' || b === ''){
+            return;
+        }
+
+        try{
+            let response = await $.get('/calc/' + a + '/' + b + '/div');
+            $('#result').html(JSON.stringify(response));
+        }catch(err){
+            $('#result').html(JSON.stringify(err));
+        }
+    }
+</script>
+</body>
+</html>
